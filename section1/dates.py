@@ -4,6 +4,15 @@ import numpy as np
 
 
 def date_sorter():
+    """
+    This function takes a record
+    and extracts the dates
+    :arg:
+        :Input file
+    :return:
+        :List of dates in sorted order
+    """
+
     doc = []
     with open('dates.txt') as file:
         for line in file:
