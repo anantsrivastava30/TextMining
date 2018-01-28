@@ -99,5 +99,3 @@ def date_sorter():
     return pd.Series(data.index.values)
 
 
-if __name__ == "__main__":
-    print(date_sorter())

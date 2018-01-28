@@ -5,9 +5,8 @@ import pandas as pd
 import numpy as np
 from collections import defaultdict
 import operator
-from nltk.corpus import words
-from .spellchecker import jaccard
-
+from section2.spellchecker import jaccard
+from section2.spellchecker import dl_distance
 with open('moby.txt', 'r') as f:
     moby_raw = f.read()
 
@@ -58,3 +57,12 @@ print("\n5 most frequent part of speect in this text:")
 print(sorted(fq.items(), key=operator.itemgetter(1), reverse=True)[:5])
 
 entries = ['cormulent', 'incendenece', 'validrate']
+
+print('Jaccard distance for 3-grams outputs '
+      'that ' + ', '.join('{} is {}'.format(*ent) for ent in zip(entries, jaccard(entries, 3))))
+
+print('Jaccard distance for 4-grams outputs '
+      'that ' + ', '.join('{} is {}'.format(*ent) for ent in zip(entries, jaccard(entries, 4))))
+
+print('Edit distance on the two words with transpositions. '
+      'that ' + ', '.join('{} is {}'.format(*ent) for ent in zip(entries, dl_distance(entries))))
