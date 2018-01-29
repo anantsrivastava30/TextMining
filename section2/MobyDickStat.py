@@ -7,6 +7,7 @@ from collections import defaultdict
 import operator
 from section2.spellchecker import jaccard
 from section2.spellchecker import dl_distance
+
 with open('moby.txt', 'r') as f:
     moby_raw = f.read()
 
@@ -38,16 +39,15 @@ print(df.to_string(index=False))
 
 print("\n Tokens below have length more than 5 and a frequency of more than 150!:")
 print(sorted([w for w in dist.keys() if len(w) > 5 and dist[w] > 150]))
-
-
-print('\n{!s} is the longest word in the text.'.format(str.title(sorted(text1, key=len)[-1])))
+longest = sorted(text1, key=len)[-1]
+print('\n{!s} is the longest word in the text.'.format(str.title(str(longest))))
 
 segement = [w for w in zip(dist.values(), dist.keys()) if w[0] > 2000 and w[1].isalpha()]
 print("\nUnique words have a frequency of more than 2000:")
 print(sorted(segement, key=lambda s: s[0], reverse=True))
 
 print("There are an average of {:2.2f} tokens per sentence.".format(np.mean([len(nltk.word_tokenize(sent)) for
-                                                                        sent in nltk.sent_tokenize(moby_raw)])))
+                                                                             sent in nltk.sent_tokenize(moby_raw)])))
 
 fq = defaultdict(int)
 for w in [x[1] for x in nltk.pos_tag(moby_tokens)]:
@@ -64,5 +64,7 @@ print('Jaccard distance for 3-grams outputs '
 print('Jaccard distance for 4-grams outputs '
       'that ' + ', '.join('{} is {}'.format(*ent) for ent in zip(entries, jaccard(entries, 4))))
 
-print('Edit distance on the two words with transpositions. '
+print('Edit distance on the two words with transpositions output'
       'that ' + ', '.join('{} is {}'.format(*ent) for ent in zip(entries, dl_distance(entries))))
+
+exit(0)
